@@ -1,7 +1,7 @@
 {
-  "name": "7dev-website",
+  "name": "gulp-boilerplate",
   "version": "1.0.0",
-  "description": "Website for 7dev tapajós code studio",
+  "description": "simple boilerplate for gulp projets with pug, sass, browsersync",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
