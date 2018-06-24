@@ -19,6 +19,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "sasslintConfig": ".sass-lint.yml",
   "author": "Ricardo Gouveia",
   "license": "MIT"
 }
