@@ -33,22 +33,32 @@ After that, you should be good to go :)
 
 ```sh
 ├── assets/
-│   ├── css/
-│   │   └── style.min.css
 │   ├── sass/
 │   │   ├── partials/
 │   │   │   └── _*.sass
 │   │   └── style.sass
 │   │   └── variables.sass
 │   ├── img/
+│   │   └── *.{jpg||png||svg}
+├── build/
+│   ├── assets/
+│   │   ├── css/
+│   │   │   └── style.min.css
+│   │   └── img/
+│   │       └── *.min.{jpg||png||svg}
+│   ├── js/
+│   │   └── index.min.js
+│   ├── *.html
+│   └── favicon.ico
 ├── js/
-│   ├── modules/
-│   │   └── *.js
-│   └── index.min.js
+│   └── *.js
+├── pug/
+│   └── *.pug
+├── .editorconfig
+├── .gitignore
 ├── gulpfile.js
-├── index.pug
 ├── package.json
-├── README.md
+└── README.md
 ```
 
 ### Tasks
