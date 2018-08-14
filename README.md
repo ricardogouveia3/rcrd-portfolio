@@ -1,17 +1,11 @@
-<p align="center">
-  <img src="<-- LOGO -->" width="100">
-</p>
-
 # Gulp Boilerplate
 
-[Access the website](<-- URL -->)
-
 This project uses:
+
 - [Pug](https://pugjs.org/)
 - [Sass](http://sass-lang.com/)
 - [Gulp](https://gulpjs.com/)
 - [Browsersync](https://www.browsersync.io/)
-
 
 ## Getting Started
 
@@ -25,8 +19,8 @@ First of all, install the dependencies to run this boilerplate.
 ```sh
 
 # Clone this repository
-git clone git@github.com:ricardogouveia3/<-- REPO -->
-cd <-- REPO -->
+git clone git@github.com:ricardogouveia3/gulp-boilerplate.git
+cd gulp-boilerplate
 
 # install dependencies
 npm install
@@ -35,7 +29,6 @@ npm install
 
 After that, you should be good to go :)
 
-
 ### Folders/Files Structure
 
 ```sh
@@ -43,28 +36,20 @@ After that, you should be good to go :)
 │   ├── css/
 │   │   └── style.min.css
 │   ├── sass/
-│   |   ├── partials/
-│   │   |   └── _*.sass
+│   │   ├── partials/
+│   │   │   └── _*.sass
 │   │   └── style.sass
 │   │   └── variables.sass
 │   ├── img/
 ├── js/
 │   ├── modules/
-│   |   └── *.js
+│   │   └── *.js
 │   └── index.min.js
 ├── gulpfile.js
 ├── index.pug
 ├── package.json
 ├── README.md
 ```
-
-These structure will change during the project.
-
-
-### Code Standarts
-
-<-- CODE STANDART -->
-
 
 ### Tasks
 
@@ -94,7 +79,6 @@ These tasks are used for building and deploying. They are perforance and good pr
 
 - `gulp`: Calls watch. Used for dev stages.
 - `gulp build`: Calls build tasks. Used for buiding.
-
 
 ## License
 

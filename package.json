@@ -1,7 +1,7 @@
 {
   "name": "gulp-boilerplate",
   "version": "1.0.0",
-  "description": "simple boilerplate for gulp projets with pug, sass, browsersync",
+  "description": "Simple boilerplate for gulp projects with pug, sass and browsersync",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
@@ -19,7 +19,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "sasslintConfig": ".sass-lint.yml",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ricardogouveia3/gulp-boilerplate.git"
+  },
   "author": "Ricardo Gouveia",
   "license": "MIT"
 }
