@@ -38,8 +38,8 @@ After that, you should be good to go :)
 │   │   │   └── _*.sass
 │   │   └── style.sass
 │   │   └── variables.sass
-│   ├── img/
-│   │   └── *.{jpg||png||svg}
+│   └── img/
+│       └── *.{jpg||png||svg}
 ├── build/
 │   ├── assets/
 │   │   ├── css/

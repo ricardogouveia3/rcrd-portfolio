@@ -7,14 +7,16 @@ let gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   imagemin = require('gulp-imagemin'),
   watch = require('gulp-watch'),
+  htmlbeautify = require('gulp-html-beautify'),
   browserSync = require('browser-sync').create();
 
 
 // Dev Tasks
 gulp.task('pug-dev', () => {
-  return gulp.src('index.pug')
+  return gulp.src('pug/**/*.pug')
     .pipe(pug())
-    .pipe(gulp.dest('./'));
+    .pipe(htmlbeautify({indentSize: 2}))
+    .pipe(gulp.dest('build/'));
 });
 
 gulp.task('sass-dev', () => {
