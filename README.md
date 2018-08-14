@@ -65,30 +65,33 @@ After that, you should be good to go :)
 
 #### Dev Tasks
 
-These tasks are used for live reloadind and debugging. They are time saving focused. Don't use then for deploying.
+These tasks are used for live reloading and debugging. They are time-saving focused. Don't use then for deploying.
 
-- `gulp pug-dev`: Compiles `index.pug` into `index.html` on root directory.
-- `gulp sass-dev`: Compiles `style.sass` and its dependencies; concat result to style.min.css (expanded style in this step).
-- `gulp js-dev`: Concat `*.js` from modules into `index.min.js`.
+- `gulp pugDev`: Compiles `pug/*.pug` into expanded `build/*.html` files. They are acessible by the name of the file, eg: `https://localhost:3000/page` for a `page.pug` file.
+- `gulp sassDev`: Compiles `style.sass` and its dependencies (`assets/sass/**/*.sass`); concat result to `build/css/style.min.css` (expanded style in this step).
+- `gulp jsDev`: Concat `js/*.js` into `build/js/index.min.js`.
+
+- `gulp dev`: calls all Dev tasks
 
 #### Build Tasks
 
-These tasks are used for building and deploying. They are perforance and good practice focused. They may be to slow for live reloading (or may cause looping task).
+These tasks are used for building and deploying. They are performance and good practices focused. They may be too slow for live reloading (or may cause infinite looping tasks).
 
-- `gulp pug-build`: Compiles `index.pug` into `index.html` on root directory.
-- `gulp sass-build`: Compiles `style.sass` and its dependencies; autoprefix resulting css; concat result to style.min.css.
-- `gulp js-build`: Concat `*.js` from modules into `index.min.js`.
-- `gulp image-build`: Optimize images (jpg, png, svg) from assets.
+- `gulp pugBuild`: Compiles `pug/index.pug` into `index.html` on root directory.
+- `gulp sassBuild`: Compiles `assets/sass/style.sass` and its dependencies; autoprefix resulting css; concat result to `build/css/style.min.css`.
+- `gulp jsBuild`: Concat `js/*.js` into `build/js/index.min.js`.
+- `gulp imageBuild`: Optimize images (jpg, png, svg) from `assets/img` into `build/assets/img`.
+
+- `gulp build`: Calls all Build tasks.
 
 #### Server/Live Tasks
 
-- `gulp watch`: Starts browsersync. Watch for chances in `.pug`, `.sass` and `.js` files. Calls dev tasks.
-- `gulp browsersync`: Calls browsersync.
+- `gulp watch`: Starts browsersync. Watch for chances in `.pug`, `.sass` and `.js` files. Calls dev tasks individually.
+- `gulp browsersync`: Calls browsersync. Server `/` is `build/`.
 
 #### Default tasks
 
 - `gulp`: Calls watch. Used for dev stages.
-- `gulp build`: Calls build tasks. Used for buiding.
 
 ## License
 
