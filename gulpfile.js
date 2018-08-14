@@ -2,17 +2,19 @@
 /* Dependencies */
 /****************/
 
-let gulp = require('gulp'),
-  pug = require('gulp-pug'),
-  sass = require ('gulp-sass'),
-  concat = require ('gulp-concat'),
+let autoprefixer = require('gulp-autoprefixer'),
+  beautify = require('gulp-beautify'),
+  browserSync = require('browser-sync').create(),
   cleanCSS = require('gulp-clean-css'),
-  autoprefixer = require('gulp-autoprefixer'),
-  //uglify = require('gulp-uglify'),
-  imagemin = require('gulp-imagemin'),
-  watch = require('gulp-watch'),
+  concat = require ('gulp-concat'),
+  gulp = require('gulp'),
   htmlbeautify = require('gulp-html-beautify'),
-  browserSync = require('browser-sync').create();
+  imagemin = require('gulp-imagemin'),
+  pug = require('gulp-pug'),
+  pump = require('pump'),
+  sass = require ('gulp-sass'),
+  uglify = require('gulp-uglify'),
+  watch = require('gulp-watch');
 
 
 
@@ -38,6 +40,7 @@ gulp.task('sassDev', () => {
 gulp.task('jsDev', () => {
   return gulp.src('js/*.js')
     .pipe(concat('index.min.js'))
+    .pipe(beautify({indent_size: 2}))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -65,11 +68,13 @@ gulp.task('sassBuild', () => {
     .pipe(gulp.dest('build/assets/css'));
 });
 
-gulp.task('jsBuild', () => {
-  return gulp.src('js/*.js')
-    //.pipe(uglify())
-    .pipe(concat('index.min.js'))
-    .pipe(gulp.dest('build/js'));
+gulp.task('jsBuild', (cb) => {
+  pump([
+    gulp.src('js/*.js'),
+    uglify(),
+    concat('index.min.js'),
+    gulp.dest('build/js')
+  ], cb );
 });
 
 gulp.task('imageBuild', () => {
@@ -88,11 +93,9 @@ gulp.task('build', ['pugBuild', 'sassBuild', 'jsBuild', 'imageBuild'], () => {})
 /****************/
 
 gulp.task('watch', ['browserSync', 'pugDev', 'sassDev', 'jsDev'], () => {
-
   gulp.watch(['pug/**/*.pug'], ['pugDev', browserSync.reload]);
   gulp.watch('assets/sass/**/*.sass', ['sassDev']);
   gulp.watch('js/*.js', ['jsDev', browserSync.reload]);
-
 });
 
 gulp.task('browserSync', () => {

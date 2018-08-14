@@ -8,6 +8,7 @@
     "browser-sync": "^2.24.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
+    "gulp-beautify": "^2.0.1",
     "gulp-clean-css": "^3.9.4",
     "gulp-concat": "^2.6.1",
     "gulp-html-beautify": "^1.0.1",
@@ -15,7 +16,8 @@
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
-    "gulp-watch": "^5.0.0"
+    "gulp-watch": "^5.0.0",
+    "pump": "^3.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
