@@ -7,15 +7,14 @@ let autoprefixer = require('gulp-autoprefixer'),
   browserSync = require('browser-sync').create(),
   cleanCSS = require('gulp-clean-css'),
   concat = require ('gulp-concat'),
+  del = require('del'),
   gulp = require('gulp'),
   htmlbeautify = require('gulp-html-beautify'),
   imagemin = require('gulp-imagemin'),
   pug = require('gulp-pug'),
-  pump = require('pump'),
   sass = require ('gulp-sass'),
-  uglify = require('gulp-uglify'),
+  uglify = require('gulp-uglify-es').default,
   watch = require('gulp-watch');
-
 
 
 /*************/
@@ -23,26 +22,32 @@ let autoprefixer = require('gulp-autoprefixer'),
 /*************/
 
 gulp.task('pugDev', () => {
-  return gulp.src('pug/**/*.pug')
+  return gulp.src('pug/index.pug')
     .pipe(pug())
     .pipe(htmlbeautify({indentSize: 2}))
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('sassDev', () => {
   return gulp.src(['assets/sass/*.sass', 'assets/sass/partials/*.sass'])
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(concat('style.min.css'))
-    .pipe(gulp.dest('build/assets/css'))
+    .pipe(gulp.dest('assets/css'))
     .pipe(browserSync.stream());
 });
 
-gulp.task('jsDev', () => {
+gulp.task('clearJS', () => {
+  return del(['js/index.min.js']);
+});
+
+gulp.task('jsDev--comp', ['clearJS'], () => {
   return gulp.src('js/*.js')
     .pipe(concat('index.min.js'))
     .pipe(beautify({indent_size: 2}))
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('js/'));
 });
+
+gulp.task('jsDev', ['clearJS', 'jsDev--comp']);
 
 // Main dev Task
 gulp.task('dev', ['pugDev', 'sassDev', 'jsDev']);
@@ -54,9 +59,9 @@ gulp.task('dev', ['pugDev', 'sassDev', 'jsDev']);
 /***************/
 
 gulp.task('pugBuild', () => {
-  return gulp.src('pug/**/*.pug')
+  return gulp.src('pug/index.pug')
     .pipe(pug())
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('sassBuild', () => {
@@ -65,26 +70,24 @@ gulp.task('sassBuild', () => {
     .pipe(autoprefixer())
     .pipe(cleanCSS())
     .pipe(concat('style.min.css'))
-    .pipe(gulp.dest('build/assets/css'));
+    .pipe(gulp.dest('assets/css'));
 });
 
-gulp.task('jsBuild', (cb) => {
-  pump([
-    gulp.src('js/*.js'),
-    uglify(),
-    concat('index.min.js'),
-    gulp.dest('build/js')
-  ], cb );
+gulp.task('jsBuild', ['clearJS'], (cb) => {
+  return gulp.src('js/*.js')
+    .pipe(concat('index.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('js/'));
 });
 
 gulp.task('imageBuild', () => {
   return gulp.src('assets/img/**/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('build/assets/img'));
+    .pipe(gulp.dest('assets/img'));
 });
 
 // Main Build Task
-gulp.task('build', ['pugBuild', 'sassBuild', 'jsBuild', 'imageBuild'], () => {});
+gulp.task('build', ['pugBuild', 'sassBuild', 'clearJS', 'jsBuild', 'imageBuild'], () => {});
 
 
 
@@ -101,7 +104,7 @@ gulp.task('watch', ['browserSync', 'pugDev', 'sassDev', 'jsDev'], () => {
 gulp.task('browserSync', () => {
   browserSync.init({
     server: {
-      baseDir: 'build',
+      baseDir: './',
       serveStaticOptions: {
         extensions: ["html"]
       }
