@@ -3,56 +3,37 @@ fetch('https://raw.githubusercontent.com/ricardogouveia3/rcrd-portfolio/master/d
   response.json().then(function(data){
 
     for (var project of data.projects) {
-      buildPortfolioCard(project.link, project.image, project.type, project.title, project.date, project.color);
+      buildPortfolioCard(
+        project.link,
+        project.image,
+        project.type,
+        project.title,
+        project.date,
+        project.color
+      );
     }
 
   });
 })
 .catch(function(err){ console.error('Failed retrieving portfolio information', err); });
 
-function buildPortfolioCard(link, img, type, title, date, color) {
+function buildPortfolioCard (link, img, type, title, date, color) {
+  img = "url('https://raw.githubusercontent.com/ricardogouveia3/rcrd-portfolio/master/" + img + "')"
 
-  var cardFragment = document.createDocumentFragment();
+  let card = `
+  <li class="portfolio__card-grid__card-container">
+    <a class="portfolio__card-grid__card-container__card" id="PortfolioItemLink" href="${link}">
+      <div class="portfolio__card-grid__card-container__card__img" id="PortfolioItemImage" style="background-image: ${img}">
+      </div>
+      <div class="portfolio__card-grid__card-container__card__info">
+        <span class="portfolio__card-grid__card-container__card__info__job-type" id="PortfolioItemType" style="border-color: ${color};">${type}</span>
+        <h4 class="portfolio__card-grid__card-container__card__info__job-title" id="PortfolioItemTitle">${title}</h4>
+        <span class="portfolio__card-grid__card-container__card__info__job-date" id="PortfolioItemDate">${date}</span>
+      </div>
+    </a>
+  </li>
+  `
 
-  var cardContainer = document.createElement('li');
-  cardContainer.classList.add('portfolio__card-grid__card-container');
-  cardFragment.appendChild(cardContainer);
-
-  var cardLink = document.createElement('a');
-  cardLink.classList.add('portfolio__card-grid__card-container__card');
-  cardLink.id = 'PortfolioItemLink';
-  cardLink.href = link;
-  cardContainer.appendChild(cardLink);
-
-  var cardImage = document.createElement('div');
-  cardImage.classList.add('portfolio__card-grid__card-container__card__img');
-  cardImage.id = 'PortfolioItemImage';
-  cardImage.style.backgroundImage = 'url("' + img + '")';
-  cardLink.appendChild(cardImage);
-
-  var cardInfo = document.createElement('div');
-  cardInfo.classList.add('portfolio__card-grid__card-container__card__info');
-  cardLink.appendChild(cardInfo);
-
-  var cardJobType = document.createElement('span');
-  cardJobType.classList.add('portfolio__card-grid__card-container__card__info__job-type');
-  cardJobType.id = 'PortfolioItemType';
-  cardJobType.innerText = type;
-  cardJobType.style.borderColor = color;
-  cardInfo.appendChild(cardJobType);
-
-  var cardInfoTitle = document.createElement('h4');
-  cardInfoTitle.classList.add('portfolio__card-grid__card-container__card__info__job-title');
-  cardInfoTitle.id = 'PortfolioItemTitle';
-  cardInfoTitle.innerText = title;
-  cardInfo.appendChild(cardInfoTitle);
-
-  var cardInfoDate = document.createElement('span');
-  cardInfoDate.classList.add('portfolio__card-grid__card-container__card__info__job-date');
-  cardInfoDate.id = 'PortfolioItemDate';
-  cardInfoDate.innerText = date;
-  cardInfo.appendChild(cardInfoDate);
-
-  document.getElementById('portfolioCardGrid').appendChild(cardFragment);
+  document.getElementById('portfolioCardGrid').innerHTML += card
 }
 
