@@ -1,8 +1,8 @@
-fetch('https://raw.githubusercontent.com/ricardogouveia3/rcrd-portfolio/master/data/portfolio.json')
-.then(function(response){
-  response.json().then(function(data){
+fetch('https://api.rcrd.me/rcrd/portfolio')
+  .then(response => response.json())
+  .then((response) => {
+    for (var project of response) {
 
-    for (var project of data.projects) {
       buildPortfolioCard(
         project.link,
         project.image,
@@ -13,11 +13,10 @@ fetch('https://raw.githubusercontent.com/ricardogouveia3/rcrd-portfolio/master/d
       );
     }
 
-  });
-})
-.catch(function(err){ console.error('Failed retrieving portfolio information', err); });
+  })
+  .catch (function (err) { console.error('Failed retrieving portfolio information', err); });
 
-function buildPortfolioCard (link, img, type, title, date, color) {
+function buildPortfolioCard(link, img, type, title, date, color) {
   img = "url('https://raw.githubusercontent.com/ricardogouveia3/rcrd-portfolio/master/" + img + "')"
 
   let card = `
