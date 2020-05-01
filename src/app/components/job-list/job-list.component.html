@@ -1,4 +1,4 @@
-<main>
+<main #mainElement>
   <ul #jobListElement>
     <app-single-job [job]="job" [jobIndex]="i" *ngFor="let job of jobList; let i = index"></app-single-job>
   </ul>

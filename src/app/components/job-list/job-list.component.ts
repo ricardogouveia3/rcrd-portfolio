@@ -4,7 +4,6 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  ContentChild,
 } from '@angular/core';
 import { PortfolioService } from '../../services/portfolio.service';
 
@@ -26,21 +25,23 @@ export class JobListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    window.addEventListener('wheel', this.captureScroll, false);
-    console.log(this.jobListElement);
+    window.addEventListener(
+      'wheel',
+      (event) => {
+        this.captureScroll(event);
+      },
+      false
+    );
   }
 
   private captureScroll(event) {
     if (window.innerWidth >= 700) {
       event.preventDefault();
 
-      if (event.deltaY < 0) {
-        console.log('scrolling up ' + event.deltaY + ' pixels');
-      } else if (event.deltaY > 0) {
-        console.log('scrolling down ' + event.deltaY + ' pixels');
-        console.log(this.jobListElement);
-        // this.jobListElement.nativeElement.scrollRight = event.deltaY;
-        // console.log(this.jobListElement);
+      if (event.deltaY) {
+        this.jobListElement.nativeElement.scrollLeft += event.deltaY;
+      } else if (event.deltaX) {
+        this.jobListElement.nativeElement.scrollLeft += -event.deltaX;
       }
     }
   }
