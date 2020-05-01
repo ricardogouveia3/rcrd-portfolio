@@ -1,1 +1,12 @@
-<p>single-job works!</p>
+<li>
+  <a href="{{ job.link }}" target="_blank" style="background-color: {{ job.color }};">
+    <div class="white"></div>
+    <div class="content">
+      <div class="text">
+        <span class="index">{{ jobIndex }}</span>
+        <h2>{{ job.title }}</h2>
+      </div>
+    </div>
+    <span class="type">{{ job.type }}</span>
+  </a>
+</li>

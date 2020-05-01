@@ -2,6 +2,10 @@ main
   overflow-x: hidden
   overflow-y: auto
 
+  @media screen and (max-width: 700px)
+    overflow-x: auto
+    overflow-y: hidden
+
 ul
   overflow: auto
   padding: 0
@@ -9,14 +13,9 @@ ul
   list-style-type: none
   display: flex
 
-li
-  padding: 120px 20px 20px 20px
-  height: 100vh
-  min-width: 480px
-  background-color: blue
-  color: white
-  border: none
-  border-right: 1px solid #ffffff
+  &:last-child
+    border: none
 
-  &:last-of-type
-    border-right: 0
+  @media screen and (max-width: 700px)
+    flex-direction: column
+    overflow-x: hidden

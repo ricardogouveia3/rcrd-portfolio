@@ -1,7 +1,5 @@
 <main>
-  <ul>
-    <li *ngFor="let job of jobList">
-      <p>{{job.title}}</p>
-    </li>
+  <ul #jobListElement>
+    <app-single-job [job]="job" [jobIndex]="i" *ngFor="let job of jobList; let i = index"></app-single-job>
   </ul>
 </main>
