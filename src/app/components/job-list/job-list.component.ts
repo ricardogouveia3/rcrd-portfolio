@@ -19,8 +19,8 @@ export class JobListComponent implements OnInit, AfterViewInit {
   public jobList: Array<object> = [];
 
   ngOnInit(): void {
-    this.portfolioService.getPortfolioData().subscribe((data) => {
-      this.jobList.push(...data);
+    this.portfolioService.getPortfolioData().subscribe((response) => {
+      this.jobList.push(...response.data);
     });
   }
 
