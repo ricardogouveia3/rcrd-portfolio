@@ -9,6 +9,6 @@ export class PortfolioService {
   constructor(private http: HttpClient) {}
 
   public getPortfolioData(): Observable<any> {
-    return this.http.get('https://api.rcrd.me/portfolio');
+    return this.http.get('https://api.rcrd.dev/portfolio');
   }
 }
